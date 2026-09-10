@@ -10,5 +10,15 @@
     ],
     "additionalDirectories": ["~/.nvm"],
     "defaultMode": "bypassPermissions"
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": true,
+    "filesystem": {
+      "allowWrite": ["."]
+    },
+    "network": {
+      "allowLocalBinding": true
+    }
   }
 }
