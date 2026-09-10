@@ -12,6 +12,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { NavList } from "./nav-list";
+import { PalettePicker } from "./palette-picker";
 import { navItems } from "./sidebar-nav";
 import { ThemeToggle } from "./theme-toggle";
 import { UserMenu } from "./user-menu";
@@ -64,6 +65,7 @@ export function Header({
       </h1>
 
       <div className="flex shrink-0 items-center gap-1.5">
+        <PalettePicker />
         <ThemeToggle />
         <UserMenu user={user} />
       </div>
