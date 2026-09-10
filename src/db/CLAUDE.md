@@ -30,3 +30,7 @@ tokens, account linkage) internally. It lives in this directory only
 because that's the one place allowed to import `src/db/index.ts`, not
 because it follows the query-function contract. Don't use it as a
 template for a real query function.
+
+Same exception, same reason: `src/db/queries/health.ts`'s
+`checkDatabaseConnection()` (M8) runs a bare `select 1` for
+`/api/health` — no rows, no tenant. Not a template either.

@@ -6,5 +6,5 @@
 - [x] M5 — Email
 - [x] M6 — Redis
 - [x] M7 — RabbitMQ
-- [ ] M8 — Deployment
+- [x] M8 — Deployment
 - [ ] M9 — Subagents & Docs
