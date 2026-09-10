@@ -3,6 +3,8 @@ import { nextCookies } from "better-auth/next-js";
 import { authAdapter } from "@/db/queries/auth-adapter";
 import { env } from "@/lib/env";
 import { sendEmail } from "@/lib/email/send";
+import { VerifyEmailTemplate } from "@/lib/email/templates/verify-email";
+import { ResetPasswordTemplate } from "@/lib/email/templates/reset-password";
 
 export const auth = betterAuth({
   database: authAdapter,
@@ -16,6 +18,7 @@ export const auth = betterAuth({
         to: user.email,
         subject: "Reset your password",
         text: `Reset your password: ${url}`,
+        react: <ResetPasswordTemplate url={url} />,
       });
     },
   },
@@ -27,6 +30,7 @@ export const auth = betterAuth({
         to: user.email,
         subject: "Verify your email",
         text: `Verify your email: ${url}`,
+        react: <VerifyEmailTemplate url={url} />,
       });
     },
   },

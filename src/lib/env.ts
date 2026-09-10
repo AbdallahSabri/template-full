@@ -30,6 +30,12 @@ const envSchema = z.object({
   S3_BUCKET: optionalString(),
   S3_REGION: optionalString(),
   S3_ENDPOINT: optionalString(),
+
+  // Optional — Resend. src/lib/email/send.ts feature-detects on both
+  // together (EMAIL_FROM alone is meaningless, RESEND_API_KEY alone can't
+  // send without a from address) and falls back to a console log.
+  RESEND_API_KEY: optionalString(),
+  EMAIL_FROM: optionalString(),
 });
 
 function loadEnv() {

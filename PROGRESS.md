@@ -3,7 +3,7 @@
 - [x] M2 — Auth
 - [x] M3 — Dashboard Shell
 - [x] M4 — Storage
-- [ ] M5 — Email
+- [x] M5 — Email
 - [ ] M6 — Redis
 - [ ] M7 — RabbitMQ
 - [ ] M8 — Deployment
