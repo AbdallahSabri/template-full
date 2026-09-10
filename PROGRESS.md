@@ -5,6 +5,6 @@
 - [x] M4 — Storage
 - [x] M5 — Email
 - [x] M6 — Redis
-- [ ] M7 — RabbitMQ
+- [x] M7 — RabbitMQ
 - [ ] M8 — Deployment
 - [ ] M9 — Subagents & Docs

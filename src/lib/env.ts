@@ -41,6 +41,11 @@ const envSchema = z.object({
   // alone; cache.ts and rate-limit.ts fall back to no-op/in-memory
   // behavior when it's unset.
   REDIS_URL: optionalString(),
+
+  // Optional — RabbitMQ. src/lib/queue/client.ts feature-detects on this
+  // alone; publish.ts falls back to running the inline handler
+  // synchronously when it's unset.
+  RABBITMQ_URL: optionalString(),
 });
 
 function loadEnv() {

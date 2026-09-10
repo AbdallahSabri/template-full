@@ -132,6 +132,7 @@ pnpm db:generate          # drizzle-kit generate (writes to drizzle/)
 pnpm db:migrate           # apply pending migrations
 pnpm lint                 # eslint, includes db-import restriction
 pnpm build                # production build, output: standalone
+pnpm queue:worker          # RabbitMQ consumer — separate long-lived process, no-ops if unconfigured
 docker compose -f docker-compose.dev.yml --profile redis --profile queue --profile storage up
 ```
 

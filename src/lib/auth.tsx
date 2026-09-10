@@ -5,6 +5,8 @@ import { env } from "@/lib/env";
 import { sendEmail } from "@/lib/email/send";
 import { VerifyEmailTemplate } from "@/lib/email/templates/verify-email";
 import { ResetPasswordTemplate } from "@/lib/email/templates/reset-password";
+import { publish } from "@/lib/queue/publish";
+import { sendWelcomeEmail } from "@/lib/queue/handlers/welcome";
 
 export const auth = betterAuth({
   database: authAdapter,
@@ -32,6 +34,22 @@ export const auth = betterAuth({
         text: `Verify your email: ${url}`,
         react: <VerifyEmailTemplate url={url} />,
       });
+    },
+  },
+  // Example queue side-effect: fire a welcome email through publish() —
+  // RabbitMQ if configured, run inline right here if not. Either way this
+  // hook fires once, right after the user row is created at sign-up.
+  databaseHooks: {
+    user: {
+      create: {
+        after: async (user) => {
+          await publish(
+            "welcome",
+            { userId: user.id, email: user.email, name: user.name },
+            sendWelcomeEmail,
+          );
+        },
+      },
     },
   },
   // Google is only registered when both env vars are set — features
