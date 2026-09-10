@@ -36,6 +36,11 @@ const envSchema = z.object({
   // send without a from address) and falls back to a console log.
   RESEND_API_KEY: optionalString(),
   EMAIL_FROM: optionalString(),
+
+  // Optional — Redis. src/lib/redis/client.ts feature-detects on this
+  // alone; cache.ts and rate-limit.ts fall back to no-op/in-memory
+  // behavior when it's unset.
+  REDIS_URL: optionalString(),
 });
 
 function loadEnv() {

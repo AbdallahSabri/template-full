@@ -4,7 +4,7 @@
 - [x] M3 — Dashboard Shell
 - [x] M4 — Storage
 - [x] M5 — Email
-- [ ] M6 — Redis
+- [x] M6 — Redis
 - [ ] M7 — RabbitMQ
 - [ ] M8 — Deployment
 - [ ] M9 — Subagents & Docs
