@@ -1,0 +1,10 @@
+- [ ] M0 — Bootstrap
+- [ ] M1 — Database & Drizzle
+- [ ] M2 — Auth
+- [ ] M3 — Dashboard Shell
+- [ ] M4 — Storage
+- [ ] M5 — Email
+- [ ] M6 — Redis
+- [ ] M7 — RabbitMQ
+- [ ] M8 — Deployment
+- [ ] M9 — Subagents & Docs
