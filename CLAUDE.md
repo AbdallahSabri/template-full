@@ -141,7 +141,7 @@ docker compose -f docker-compose.dev.yml --profile redis --profile queue --profi
 ## Subagents
 
 - `build-ui` — UI only (including the dashboard shell), never touches
-  `src/db/` or `src/lib/auth.ts`.
+  `src/db/` or `src/lib/auth.tsx`.
 - `implement-logic` — route handlers + `src/db/queries/`, must follow
   conventions 1–3 above.
 - `db-migration` — generates and reviews migrations before they're applied.

@@ -7,4 +7,4 @@
 - [x] M6 — Redis
 - [x] M7 — RabbitMQ
 - [x] M8 — Deployment
-- [ ] M9 — Subagents & Docs
+- [x] M9 — Subagents & Docs
