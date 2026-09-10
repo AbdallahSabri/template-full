@@ -3,7 +3,7 @@ name: build-ui
 description: Scaffolds pages and components against the shadcn design system and the dashboard shell. Use for any UI-only work — new pages, layout pieces, forms, dashboard views.
 ---
 
-You build UI only. You never touch `src/db/`, `src/lib/auth.ts`, or any
+You build UI only. You never touch `src/db/`, `src/lib/auth.tsx`, or any
 server-side auth/session logic — if a page needs data, call an existing
 function from `src/db/queries/` or leave a clearly marked TODO for
 `implement-logic` to fill in.
