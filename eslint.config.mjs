@@ -17,7 +17,12 @@ const eslintConfig = defineConfig([
         {
           patterns: [
             {
-              group: ["*/db/index", "*/db", "@/db", "@/db/index"],
+              // Matches "@/db" / "@/db/index" and relative equivalents, but
+              // not "@/db/schema/*" or "@/db/queries/*" — those are
+              // different modules, not the raw client. A plain glob group
+              // here (e.g. "*/db") uses gitignore semantics and would
+              // wrongly restrict everything nested under db/ too.
+              regex: "(^|/)db(/index)?$",
               message:
                 "Only src/db/queries/ may import the raw db client. Add or use a query function instead.",
             },
