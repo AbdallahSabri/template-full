@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash scripts/check.sh *)",
+      "Bash(grep *)",
+      "Bash(cat *)",
+      "Bash(cd *)",
+      "Bash(source *)",
+      "Bash(npm run *)"
+    ],
+    "additionalDirectories": ["~/.nvm"],
+    "defaultMode": "bypassPermissions"
+  }
+}

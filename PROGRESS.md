@@ -1,4 +1,4 @@
-- [ ] M0 — Bootstrap
+- [x] M0 — Bootstrap
 - [ ] M1 — Database & Drizzle
 - [ ] M2 — Auth
 - [ ] M3 — Dashboard Shell
