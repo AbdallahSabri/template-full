@@ -30,6 +30,7 @@ module's directory** as part of the task, without being asked. Root
 `CLAUDE.md` gets a one-line pointer to it if needed, not the detail itself.
 
 Rules for scoped `CLAUDE.md` files:
+
 - Keep them short — the fallback behavior, the contract other code relies
   on, the one thing someone will get wrong if they don't read it. Not a
   full design doc.
@@ -59,17 +60,17 @@ Rules for scoped `CLAUDE.md` files:
 
 4. **Optional services are used through their interface, never checked
    inline at the call site.**
-    - Cache: `cache.wrap(key, fn, ttl)` — never `if (getRedis())`.
-    - Queue: `publish(topic, payload, inlineHandler)` — never
-      `if (getRabbitMQ())`.
-    - Email: `sendEmail(...)` — logs to console if Resend isn't configured,
-      never throws.
-    - Storage: `storage.*` helpers return a clear typed error if S3 env vars
-      are absent; API routes surface that error, they don't crash.
-      The rule: the app must run correctly, not just "not crash," with zero
-      optional env vars set. If a feature only makes sense with an optional
-      service present (e.g. uploads with no storage configured), fail with a
-      clear message — don't silently pretend it worked.
+   - Cache: `cache.wrap(key, fn, ttl)` — never `if (getRedis())`.
+   - Queue: `publish(topic, payload, inlineHandler)` — never
+     `if (getRabbitMQ())`.
+   - Email: `sendEmail(...)` — logs to console if Resend isn't configured,
+     never throws.
+   - Storage: `storage.*` helpers return a clear typed error if S3 env vars
+     are absent; API routes surface that error, they don't crash.
+     The rule: the app must run correctly, not just "not crash," with zero
+     optional env vars set. If a feature only makes sense with an optional
+     service present (e.g. uploads with no storage configured), fail with a
+     clear message — don't silently pretend it worked.
 
 5. **Env vars are validated once, in `src/lib/env.ts`, with Zod.** Required
    vars missing → throw at boot, not at first use. Optional vars are
@@ -156,3 +157,13 @@ Follow `docs/fork-checklist.md`. Do not skip the checklist to move faster —
 it exists because the things it lists (new `BETTER_AUTH_SECRET`, new
 Postgres database, DNS/SSL, Resend sending domain if used) are exactly the
 things that fail silently three weeks later if skipped.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

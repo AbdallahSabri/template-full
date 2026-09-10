@@ -19,3 +19,12 @@ hand-written — run `pnpm db:generate` after a schema change and review the
 SQL in `drizzle/` before running `pnpm db:migrate`. If the generated SQL
 doesn't match the intent, fix the schema and regenerate; don't edit the
 migration file.
+
+One deliberate exception to the "every query function scopes by
+session/tenant" rule: `src/db/queries/auth-adapter.ts` just wires the raw
+`db` client into Better Auth's Drizzle adapter — it doesn't return app
+rows, and Better Auth manages authorization for its own tables (session
+tokens, account linkage) internally. It lives in this directory only
+because that's the one place allowed to import `src/db/index.ts`, not
+because it follows the query-function contract. Don't use it as a
+template for a real query function.
