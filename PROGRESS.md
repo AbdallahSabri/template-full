@@ -1,7 +1,7 @@
 - [x] M0 — Bootstrap
 - [x] M1 — Database & Drizzle
 - [x] M2 — Auth
-- [ ] M3 — Dashboard Shell
+- [x] M3 — Dashboard Shell
 - [ ] M4 — Storage
 - [ ] M5 — Email
 - [ ] M6 — Redis
