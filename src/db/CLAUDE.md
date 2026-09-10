@@ -13,8 +13,10 @@ function that returns rows without an ownership filter is a bug, not a
 style choice — this holds even for a function that "only" ever gets called
 from an already-authorized route, because the next caller won't know that.
 
-Schema lives in `src/db/schema/` (`app.ts` for domain tables, `auth.ts` for
-Better Auth tables added in M2). Migrations are generated, never
+Schema lives in `src/db/schema/`: `app.ts` for generic/example domain
+tables, `auth.ts` for Better Auth tables (M2), and one file per module that
+earns its own schema — `uploads.ts` for storage (M4) — rather than
+piling unrelated tables into `app.ts` forever. Migrations are generated, never
 hand-written — run `pnpm db:generate` after a schema change and review the
 SQL in `drizzle/` before running `pnpm db:migrate`. If the generated SQL
 doesn't match the intent, fix the schema and regenerate; don't edit the

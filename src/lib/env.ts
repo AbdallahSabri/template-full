@@ -21,6 +21,15 @@ const envSchema = z.object({
   // be enabled; src/lib/auth.ts feature-detects on their presence.
   GOOGLE_CLIENT_ID: optionalString(),
   GOOGLE_CLIENT_SECRET: optionalString(),
+
+  // Optional — S3-compatible storage. src/lib/storage/client.ts
+  // feature-detects on S3_BUCKET alone; the rest are meaningless without
+  // it. S3_ENDPOINT is set for MinIO in dev and omitted for AWS S3.
+  AWS_ACCESS_KEY_ID: optionalString(),
+  AWS_SECRET_ACCESS_KEY: optionalString(),
+  S3_BUCKET: optionalString(),
+  S3_REGION: optionalString(),
+  S3_ENDPOINT: optionalString(),
 });
 
 function loadEnv() {

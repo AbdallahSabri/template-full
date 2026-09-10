@@ -15,6 +15,13 @@
       "when": 1789037006749,
       "tag": "0001_lying_valkyrie",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1789040126444,
+      "tag": "0002_sour_wither",
+      "breakpoints": true
     }
   ]
 }

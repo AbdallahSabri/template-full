@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
@@ -62,14 +63,16 @@ export function UserMenu({ user }: { user: CurrentUser }) {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-56">
-        <DropdownMenuLabel>
-          <p className="text-foreground truncate text-sm font-medium">
-            {user.name}
-          </p>
-          <p className="text-muted-foreground truncate text-xs font-normal">
-            {user.email}
-          </p>
-        </DropdownMenuLabel>
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>
+            <p className="text-foreground truncate text-sm font-medium">
+              {user.name}
+            </p>
+            <p className="text-muted-foreground truncate text-xs font-normal">
+              {user.email}
+            </p>
+          </DropdownMenuLabel>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem render={<Link href="/profile" />}>
           <UserIcon className="size-4" aria-hidden="true" />
