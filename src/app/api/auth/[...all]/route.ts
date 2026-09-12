@@ -11,7 +11,12 @@ export { GET };
 // and delegating everything else straight through, rather than touching
 // Better Auth internals. See src/lib/redis/CLAUDE.md for the rate-limit
 // fallback behavior.
-const RATE_LIMITED_SUFFIXES = ["/sign-in/email", "/sign-up/email"];
+const RATE_LIMITED_SUFFIXES = [
+  "/sign-in/email",
+  "/sign-up/email",
+  "/request-password-reset",
+  "/send-verification-email",
+];
 const LIMIT = 10;
 const WINDOW_SECONDS = 60;
 
