@@ -6,7 +6,10 @@
       "Bash(cat *)",
       "Bash(cd *)",
       "Bash(source *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(git commit *)",
+      "Bash(git push)",
+      "Bash(git push *)"
     ],
     "additionalDirectories": ["~/.nvm"],
     "defaultMode": "bypassPermissions"
