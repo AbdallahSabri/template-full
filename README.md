@@ -89,7 +89,14 @@ pnpm queue:worker            # RabbitMQ consumer — separate long-lived process
 │   ├── deploy-checklist.md  # pre-deploy verification on Coolify
 │   └── fork-checklist.md    # turning this template into a real project
 ├── drizzle/                 # generated SQL migrations (committed)
-├── .claude/agents/          # subagent definitions (build-ui, implement-logic, db-migration, deploy-reviewer)
+├── _features/                # active feature work — see "Feature workflow" below
+│   ├── CLAUDE.md             # the _features/ protocol
+│   ├── INDEX.md              # feature | status | last touched | notes
+│   └── <YYYY-MM-DD>_<slug>/  # one folder per in-flight feature
+├── _shipped/                 # completed features, moved here as-is, nothing deleted
+├── .claude/
+│   ├── agents/               # subagent definitions (build-ui, implement-logic, db-migration, deploy-reviewer)
+│   └── commands/              # /feature-create, /feature-plan, /feature-build-tasks, /feature-implement-tasks
 └── src/
     ├── middleware.ts        # session-cookie presence check only, not authz
     ├── app/
@@ -107,6 +114,55 @@ pnpm queue:worker            # RabbitMQ consumer — separate long-lived process
 Several modules under `src/lib/` and `src/db/` have their own scoped
 `CLAUDE.md` with module-specific conventions — read those before changing
 that module's code.
+
+## Feature workflow
+
+New feature work goes through four slash commands in order, each producing
+one set of artifacts in `_features/<YYYY-MM-DD>_<feature-slug>/`. Don't skip
+a stage — each command reads the previous stage's output.
+
+| Command                                       | Input                                        | Produces                                                        | Feature status after      |
+| --------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------- | ------------------------- |
+| `/feature-create <description>`               | free-text description                        | `SPEC.md`                                                       | `spec`                    |
+| `/feature-plan <path to SPEC.md>`             | `SPEC.md`                                    | `PLAN.md` (may also touch `SPEC.md`)                            | `planned`                 |
+| `/feature-build-tasks <path to PLAN.md>`      | `PLAN.md`, `SPEC.md`                         | `TASKS.md`, `STATE.md`, `MIGRATION.md` (only if schema changes) | `ready to build`          |
+| `/feature-implement-tasks <path to TASKS.md>` | `TASKS.md`, `STATE.md`, `PLAN.md`, `SPEC.md` | code, one milestone at a time                                   | `in progress` → `shipped` |
+
+1. **`/feature-create`** — describe the feature in plain English. It derives
+   a kebab-case slug, creates `_features/<date>_<slug>/`, explores the
+   codebase to ground the spec in what already exists, and writes `SPEC.md`
+   (what & why, acceptance criteria, out of scope, files likely touched,
+   assumptions). It stops and asks first if the description leaves a real
+   scope or approach decision open. Adds a row to `_features/INDEX.md`.
+2. **`/feature-plan`** — point it at that `SPEC.md`. It explores the actual
+   code (not just the spec's guesses) and writes an ordered, file-level
+   `PLAN.md`: approach, steps, key decisions/trade-offs, risks. May adjust
+   `SPEC.md` if planning reveals the scope needs to change.
+3. **`/feature-build-tasks`** — point it at `PLAN.md`. It writes
+   `TASKS.md` (a milestone-ordered checklist, each milestone sized to one
+   focused session) and `STATE.md` (the running source of truth for
+   progress/blockers/decisions). `MIGRATION.md` is added only if the
+   feature actually touches the schema.
+4. **`/feature-implement-tasks`** — point it at `TASKS.md` to start, resume,
+   or continue. Each invocation implements exactly one unchecked milestone:
+   - Delegates the actual implementation per task to the owning subagent
+     (`db-migration` for schema, `implement-logic` for route
+     handlers/`db/queries/`, `build-ui` for pages/components, `deploy-reviewer`
+     for Dockerfile/Coolify/env-var work), implementing directly only when a
+     task fits none of them.
+   - Runs the milestone's gate (`pnpm lint`, `pnpm build`, any manual check)
+     before checking anything off — never commits on a failing gate.
+   - Commits per milestone as `feat(<feature-slug>/m<N>): <milestone name>`,
+     then updates `STATE.md` and `_features/INDEX.md` and stops — one
+     milestone per invocation, run it again to continue.
+   - When the last milestone finishes, moves the whole feature folder as-is
+     to `_shipped/<same-folder-name>/` (nothing deleted) and marks it
+     `shipped` in `INDEX.md`.
+
+`_features/CLAUDE.md` holds the underlying protocol these commands follow
+(folder naming, when each file is created, what merges into `STATE.md`).
+`_features/INDEX.md` is the at-a-glance status table across all features,
+active and shipped.
 
 ## Core conventions
 
