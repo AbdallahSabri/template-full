@@ -1,4 +1,4 @@
-# template-full
+# Template
 
 A reusable full-stack starter: Next.js 16 (App Router, TypeScript strict),
 Postgres, Drizzle ORM, Better Auth, and Tailwind + shadcn/ui, deployed on
