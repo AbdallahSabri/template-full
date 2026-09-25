@@ -1,8 +1,16 @@
 ---
-description: Create a new feature folder and its SPEC.md from a description
+description: Create a new feature folder and its SPEC.md from a description. Requires the description text.
+argument-hint: <description of the feature>
 ---
 
 Argument: $ARGUMENTS — a free-text description of the feature to build.
+
+## Gate: a description is mandatory
+
+Before doing anything else, check that $ARGUMENTS contains text. If it is
+empty or only whitespace, **stop immediately**: do not read, explore, create,
+or edit anything. Reply with one short message: this command needs a feature
+description, e.g. `/feature-create <what the feature should do>`. Nothing else.
 
 1. Derive a short kebab-case feature-slug from the description.
 2. Check _features/ and _shipped/ for any existing folder ending in that

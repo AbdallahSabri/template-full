@@ -1,8 +1,17 @@
 ---
-description: Convert a feature's SPEC.md into a technical PLAN.md
+description: Convert a feature's SPEC.md into a technical PLAN.md. Requires the SPEC.md path.
+argument-hint: <path to SPEC.md>
 ---
 
 Argument: $ARGUMENTS — path to a SPEC.md file.
+
+## Gate: a SPEC.md path is mandatory
+
+Before doing anything else, check that $ARGUMENTS is a path to an existing file
+named `SPEC.md`. If $ARGUMENTS is empty, does not end in `SPEC.md`, or the file
+does not exist, **stop immediately**: do not read, explore, or edit anything
+else. Reply with one short message: this command needs the path to a SPEC.md,
+e.g. `/feature-plan _features/<folder>/SPEC.md`. Nothing else.
 
 1. Read the SPEC.md at the given path.
 2. Explore the codebase areas named in its "files/modules likely touched"
